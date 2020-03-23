@@ -8,21 +8,23 @@ botaoAdicionar.addEventListener("click", function(event) {
 
     var pacienteTr = montaTr(paciente);
 
-    //Adição aqui
     var erros = validaPaciente(paciente);
 
-     //exibe a ul dos erros
-     if (erros.length > 0) {
+    if (erros.length > 0) {
         exibeMensagensDeErro(erros);
+
+        return;
     }
-    
-    //adiciona o paciente na tabela
+
     var tabela = document.querySelector("#tabela-pacientes");
+
     tabela.appendChild(pacienteTr);
+
     form.reset();
 
-    var exibeMensagensDeErro = document.querySelector("#mensagens-erro");
-    exibeMensagensDeErro.innerHTML = "";
+    var mensagensErro = document.querySelector("#mensagens-erro");
+    mensagensErro.innerHTML = "";
+
 });
 
 function obtemPacienteDoFormulario(form) {
@@ -63,10 +65,11 @@ function validaPaciente(paciente) {
 
     var erros = [];
 
-     if(paciente.nome.length == 0) {
-         erros.push("O nome nao pode ser em branco");
-     }
-     if (paciente.gordura.length == 0) {
+    if (paciente.nome.length == 0) {
+        erros.push("O nome não pode ser em branco");
+    }
+
+    if (paciente.gordura.length == 0) {
         erros.push("A gordura não pode ser em branco");
     }
 
@@ -89,7 +92,6 @@ function validaPaciente(paciente) {
     return erros;
 }
 
-//cria as li que concatenam na ul a cada erro 
 function exibeMensagensDeErro(erros) {
     var ul = document.querySelector("#mensagens-erro");
     ul.innerHTML = "";
